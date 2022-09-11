@@ -4,13 +4,11 @@ import com.meeting.bo.Activities;
 import com.meeting.service.MeetingSchedulerService;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -18,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+
 @RunWith(MockitoJUnitRunner.class)
 public class MeetingSchedulerControllerTest {
     @InjectMocks
@@ -27,7 +26,7 @@ public class MeetingSchedulerControllerTest {
     private MeetingSchedulerService meetingSchedulerService;
 
     @Before
-    public void before (){
+    public void before() {
         meetingSchedulerController = new MeetingSchedulerController(meetingSchedulerService);
     }
 
