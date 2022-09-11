@@ -4,6 +4,7 @@ import com.meeting.bo.Activities;
 import com.meeting.bo.Meeting;
 import com.meeting.bo.MeetingDetails;
 import com.meeting.bo.Meetings;
+import com.meeting.exception.MeetingSchedulerException;
 import com.meeting.service.MeetingSchedulerService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -70,7 +71,7 @@ public class MeetingSchedulerServiceImpl implements MeetingSchedulerService {
      * @param meetings
      * @return
      */
-    private Meetings processMeeting(String meetings) {
+    private Meetings processMeeting(String meetings) throws MeetingSchedulerException {
         try {
             String[] data = meetings.split(NEWLINE);
             String[] officeHours = data[0].split(" ");
@@ -82,8 +83,9 @@ public class MeetingSchedulerServiceImpl implements MeetingSchedulerService {
             Map<LocalDate, Set<MeetingDetails>> meetingList = getMeetingList(data, officeStartTime, officeFinishTime);
             return new Meetings(officeStartTime, officeFinishTime,
                     meetingList);
-        } catch (Exception e) {
-            return null;
+        } catch (Exception ex) {
+            log.error("Exception in processMeeting", ex);
+            throw new MeetingSchedulerException("ProcessMeeting :: ", ex);
         }
 
     }
@@ -96,7 +98,7 @@ public class MeetingSchedulerServiceImpl implements MeetingSchedulerService {
      * @param officeFinishTime
      * @return
      */
-    private Map<LocalDate, Set<MeetingDetails>> getMeetingList(String[] data, LocalTime officeStartTime, LocalTime officeFinishTime) {
+    private Map<LocalDate, Set<MeetingDetails>> getMeetingList(String[] data, LocalTime officeStartTime, LocalTime officeFinishTime) throws MeetingSchedulerException {
         Map<LocalDate, Set<MeetingDetails>> meetingList = new HashMap<LocalDate, Set<MeetingDetails>>();
 
         for (int i = 1; i < data.length; i = i + 2) {
@@ -126,20 +128,25 @@ public class MeetingSchedulerServiceImpl implements MeetingSchedulerService {
      * @return
      */
     private MeetingDetails extractMeeting(String data, String[] meetingSlot, LocalTime officeStartTime
-            , LocalTime officeEndTime) {
-        String[] bookingDetailLine = data.split(" ");
-        String emplId = bookingDetailLine[2];
-        LocalDateTime meetingStartDateTime = LocalDateTime.parse(getDateTime(meetingSlot), dateTimeFormatter);
-        LocalTime meetingStartTime = LocalTime.parse(meetingSlot[1], timeFormatter);
-        LocalDateTime meetingEndDateTime = meetingStartDateTime.plusHours(Integer.parseInt(meetingSlot[2]));
-        LocalTime meetingEndTime = meetingStartTime.plusHours(Integer.parseInt(meetingSlot[2]));
+            , LocalTime officeEndTime) throws MeetingSchedulerException {
+        try {
+            String[] bookingDetailLine = data.split(" ");
+            String emplId = bookingDetailLine[2];
+            LocalDateTime meetingStartDateTime = LocalDateTime.parse(getDateTime(meetingSlot), dateTimeFormatter);
+            LocalTime meetingStartTime = LocalTime.parse(meetingSlot[1], timeFormatter);
+            LocalDateTime meetingEndDateTime = meetingStartDateTime.plusHours(Integer.parseInt(meetingSlot[2]));
+            LocalTime meetingEndTime = meetingStartTime.plusHours(Integer.parseInt(meetingSlot[2]));
 
-        if (!validateBusinessHour(officeStartTime, officeEndTime, meetingStartTime, meetingEndTime)) {
-            return MeetingDetails.builder().empId(emplId).startDateTime(meetingStartDateTime)
-                    .startTime(meetingStartTime).endDateTime(meetingEndDateTime).endTime(meetingEndTime).build();
-        } else {
-            log.warn("Invalid Booking {} - {}", data, meetingSlot);
-            return null;
+            if (!validateBusinessHour(officeStartTime, officeEndTime, meetingStartTime, meetingEndTime)) {
+                return MeetingDetails.builder().empId(emplId).startDateTime(meetingStartDateTime)
+                        .startTime(meetingStartTime).endDateTime(meetingEndDateTime).endTime(meetingEndTime).build();
+            } else {
+                log.warn("Invalid Booking {} - {}", data, meetingSlot);
+                return null;
+            }
+        } catch (Exception ex) {
+            log.error("Exception in processMeeting", ex);
+            throw new MeetingSchedulerException("ProcessMeeting :: ", ex);
         }
     }
 
