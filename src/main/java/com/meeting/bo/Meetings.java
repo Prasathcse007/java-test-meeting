@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Map;
 import java.util.Set;
-
 
 @Data
 @AllArgsConstructor
@@ -19,7 +20,10 @@ import java.util.Set;
 @EqualsAndHashCode
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Activities {
-    private LocalDate data;
-    private Set<Meeting> bookings;
+public class Meetings {
+
+    private LocalTime officeStartTime;
+    private LocalTime officeEndTime;
+    private Map<LocalDate, Set<MeetingDetails>> meetings;
+
 }

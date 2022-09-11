@@ -1,13 +1,5 @@
 package com.ecom.enums;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
-import java.util.List;
-
-
 public enum Constants {
     FIXED("FIXED"),
     PERCENTAGE("PERCENTAGE"),
@@ -16,7 +8,7 @@ public enum Constants {
     INDIVIDUAL("INDIVIDUAL");
 
 
-    private String value;
+    private final String value;
 
     Constants(String value) {
         this.value = value;

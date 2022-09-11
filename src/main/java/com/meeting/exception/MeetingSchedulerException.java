@@ -1,6 +1,6 @@
-package com.ecom.exception;
+package com.meeting.exception;
 
-public class MeetingSchedulerException extends Exception{
+public class MeetingSchedulerException extends Exception {
     public MeetingSchedulerException(String message) {
         super(message);
     }

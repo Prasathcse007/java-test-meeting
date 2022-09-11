@@ -10,9 +10,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Objects;
 
 
 @Slf4j
@@ -28,12 +33,24 @@ public class MeetingSchedulerController {
         return "Alive";
     }
 
+    /**
+     * Process the bulk meeting details
+     *
+     * @param searchFieldContent
+     * @return
+     */
     @PostMapping(value = "/bookings")
     @ApiOperation(value = "/bookings")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success")
     })
-    public ResponseEntity<List<Activities>> order(@RequestBody String searchFieldContent) {
-        return new ResponseEntity<>(meetingSchedulerService.process(searchFieldContent), HttpStatus.OK);
+    public ResponseEntity<List<Activities>> order(@RequestBody String meetings) {
+        List<Activities> activities = meetingSchedulerService.process(meetings);
+        if (Objects.isNull(activities)) {
+            return new ResponseEntity<>(activities, HttpStatus.BAD_REQUEST);
+        } else {
+            return new ResponseEntity<>(activities, HttpStatus.OK);
+        }
+
     }
 }

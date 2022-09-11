@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface MeetingSchedulerService {
 
-    List<Activities> process(String searchFieldContent);
+    List<Activities> process(String meetings);
 }
