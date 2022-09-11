@@ -17,19 +17,33 @@ the following format:
 # Sample Input
 
 0900 1730
+
 2020-01-18 10:17:06 EMP001
+
 2020-01-21 09:00 2
+
 2020-01-18 12:34:56 EMP002
+
 2020-01-21 09:00 2
+
 2020-01-18 09:28:23 EMP003
+
 2020-01-22 14:00 2
+
 2020-01-18 11:23:45 EMP004
+
 2020-01-22 16:00 1
+
 2020-01-15 17:29:12 EMP005
+
 2020-01-21 16:00 3
+
 2020-01-18 11:00:45 EMP006
+
 2020-01-23 16:00 1
+
 2020-01-15 11:00:45 EMP007
+
 2020-01-23 15:00 2
 
 # Processing Guidlines
@@ -38,11 +52,11 @@ the following format:
 - Meetings may not overlap.
 - The booking submission system only allows one submission at a time, so submission
   times are guaranteed to be unique.
-
-Classification: Limited
-
 - Booking must be processed in the chronological order in which they were submitted.
 - The ordering of booking submissions in the supplied input is not guaranteed.
+
+
+
 #Output
 
 [
