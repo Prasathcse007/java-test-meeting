@@ -65,12 +65,22 @@ the following format:
 
 [
 {
-"data": "2020-01-23",
+"data": "2020-01-20",
 "bookings": [
 {
-"emp_id": "EMP006",
-"start_time": "16:00:00",
-"end_time": "17:00:00"
+"emp_id": "EMP004",
+"start_time": "12:00:00",
+"end_time": "13:00:00"
+}
+]
+},
+{
+"data": "2020-01-21",
+"bookings": [
+{
+"emp_id": "EMP001",
+"start_time": "09:00:00",
+"end_time": "11:00:00"
 }
 ]
 },
@@ -90,22 +100,12 @@ the following format:
 ]
 },
 {
-"data": "2020-01-21",
+"data": "2020-01-23",
 "bookings": [
 {
-"emp_id": "EMP001",
-"start_time": "09:00:00",
-"end_time": "11:00:00"
-}
-]
-},
-{
-"data": "2020-01-20",
-"bookings": [
-{
-"emp_id": "EMP004",
-"start_time": "12:00:00",
-"end_time": "13:00:00"
+"emp_id": "EMP006",
+"start_time": "16:00:00",
+"end_time": "17:00:00"
 }
 ]
 }

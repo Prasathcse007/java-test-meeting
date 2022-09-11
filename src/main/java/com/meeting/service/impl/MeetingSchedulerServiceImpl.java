@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
@@ -99,7 +100,7 @@ public class MeetingSchedulerServiceImpl implements MeetingSchedulerService {
      * @return
      */
     private Map<LocalDate, Set<MeetingDetails>> getMeetingList(String[] data, LocalTime officeStartTime, LocalTime officeFinishTime) throws MeetingSchedulerException {
-        Map<LocalDate, Set<MeetingDetails>> meetingList = new HashMap<LocalDate, Set<MeetingDetails>>();
+        Map<LocalDate, Set<MeetingDetails>> meetingList = new TreeMap<>();
 
         for (int i = 1; i < data.length; i = i + 2) {
             String[] meetingSlot = data[i + 1].split(" ");

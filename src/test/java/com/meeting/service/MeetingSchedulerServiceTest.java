@@ -47,11 +47,11 @@ public class MeetingSchedulerServiceTest {
 
         List<Activities> bookings = meetingSchedulerService.process(meeting);
         assertEquals(3, bookings.size());
-        assertEquals(LocalDate.parse("2020-01-23"), bookings.get(0).getData());
+        assertEquals(LocalDate.parse("2020-01-21"), bookings.get(0).getData());
         assertEquals(1, bookings.get(0).getBookings().size());
         assertEquals(LocalDate.parse("2020-01-22"), bookings.get(1).getData());
         assertEquals(2, bookings.get(1).getBookings().size());
-        assertEquals(LocalDate.parse("2020-01-21"), bookings.get(2).getData());
+        assertEquals(LocalDate.parse("2020-01-23"), bookings.get(2).getData());
         assertEquals(1, bookings.get(2).getBookings().size());
     }
 
