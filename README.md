@@ -46,6 +46,10 @@ the following format:
 
 2020-01-23 15:00 2
 
+2020-01-18 11:23:45 EMP004
+
+2020-01-20 12:00 1
+
 # Processing Guidlines
 
 - No part of a meeting may fall outside of office hours (9:00 to 18:00).
@@ -61,12 +65,12 @@ the following format:
 
 [
 {
-"data": "2020-01-21",
+"data": "2020-01-23",
 "bookings": [
 {
-"emp_id": "EMP001",
-"start_time": "09:00",
-"end_time": "11:00"
+"emp_id": "EMP006",
+"start_time": "16:00:00",
+"end_time": "17:00:00"
 }
 ]
 },
@@ -75,24 +79,42 @@ the following format:
 "bookings": [
 {
 "emp_id": "EMP003",
-"start_time": "14:00",
-"end_time": "16:00"
+"start_time": "14:00:00",
+"end_time": "16:00:00"
 },
 {
 "emp_id": "EMP004",
-"start_time": "16:00",
-"end_time": "17:00"
+"start_time": "16:00:00",
+"end_time": "17:00:00"
 }
 ]
 },
 {
-"date": "2020-01-23",
+"data": "2020-01-21",
 "bookings": [
 {
-"emp_id": "EMP007",
-"start_time": "15:00",
-"end_time": "17:00"
+"emp_id": "EMP001",
+"start_time": "09:00:00",
+"end_time": "11:00:00"
+}
+]
+},
+{
+"data": "2020-01-20",
+"bookings": [
+{
+"emp_id": "EMP004",
+"start_time": "12:00:00",
+"end_time": "13:00:00"
 }
 ]
 }
 ]
+
+# Swagger
+
+http://localhost:8080/meeting-scheduler/swagger-ui/index.html#/
+
+# Test Case
+
+![img.png](img.png)
