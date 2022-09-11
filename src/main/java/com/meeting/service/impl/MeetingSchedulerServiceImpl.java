@@ -6,6 +6,7 @@ import com.meeting.bo.MeetingDetails;
 import com.meeting.bo.Meetings;
 import com.meeting.service.MeetingSchedulerService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -37,7 +38,7 @@ public class MeetingSchedulerServiceImpl implements MeetingSchedulerService {
     @Override
     public List<Activities> process(String meetings) {
         try {
-            if (meetings == null || meetings.isEmpty()) {
+            if (StringUtils.isBlank(meetings)) {
                 log.error("Invalid input, please correct the input.");
                 return null;
             }
@@ -48,7 +49,6 @@ public class MeetingSchedulerServiceImpl implements MeetingSchedulerService {
         } catch (Exception ex) {
             log.error("Exception in process", ex);
         }
-
         return null;
     }
 

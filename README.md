@@ -114,3 +114,7 @@ the following format:
 # Swagger
 
 http://localhost:8080/meeting-scheduler/swagger-ui/index.html#/
+
+# Test Case
+
+![img.png](img.png)

@@ -25,8 +25,11 @@ import java.util.Objects;
 @RequestMapping("/v1")
 public class MeetingSchedulerController {
 
-    @Autowired
     private MeetingSchedulerService meetingSchedulerService;
+
+    public MeetingSchedulerController(MeetingSchedulerService meetingSchedulerService) {
+        this.meetingSchedulerService = meetingSchedulerService;
+    }
 
     @GetMapping(value = "/")
     public String index() {
@@ -36,7 +39,7 @@ public class MeetingSchedulerController {
     /**
      * Process the bulk meeting details
      *
-     * @param searchFieldContent
+     * @param meetings
      * @return
      */
     @PostMapping(value = "/bookings")
@@ -44,7 +47,7 @@ public class MeetingSchedulerController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success")
     })
-    public ResponseEntity<List<Activities>> order(@RequestBody String meetings) {
+    public ResponseEntity<List<Activities>> process(@RequestBody String meetings) {
         List<Activities> activities = meetingSchedulerService.process(meetings);
         if (Objects.isNull(activities)) {
             return new ResponseEntity<>(activities, HttpStatus.BAD_REQUEST);
